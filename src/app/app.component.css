@@ -1,0 +1,42 @@
+app-header {
+    position: absolute;
+    height: 64px;
+    left: 0px;
+    right: 0px;
+    z-index: 1;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
+}
+
+.add-button {
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-decoration: none;
+    outline: none;
+    background-color: #1976d2;
+    font-size: 50px;
+    color: white;
+    border: none;
+    box-shadow: 2px 2px 10px black;
+    opacity: 0.6;
+}
+
+.add-button:hover {
+    opacity: 1;
+}
+
+.add-button:active {
+    opacity: 1;
+    left: 52px;
+    bottom: 48px;
+    box-shadow: 0px 0px 10px black;
+}
+
+/* @media (max-height: 169px){
+    .add-button {
+        display: none;
+    }
+} */

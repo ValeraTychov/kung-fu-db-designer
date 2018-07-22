@@ -2,13 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { BodyComponent } from './body/body.component';
+
+import { LiquidContainersModule } from './liquid-containers/liquid-containers.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    BodyComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    LiquidContainersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

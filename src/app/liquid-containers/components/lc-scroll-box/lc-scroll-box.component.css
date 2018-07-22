@@ -1,0 +1,13 @@
+:host {
+    position: relative;
+    display: block;
+    overflow: scroll;
+}
+
+:host(.ondrag) {
+    cursor: move;
+}
+
+:host /deep/ .lc-no-scroll{
+    user-select: text;
+}
