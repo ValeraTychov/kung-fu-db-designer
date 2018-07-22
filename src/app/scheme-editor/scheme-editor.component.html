@@ -1,0 +1,12 @@
+<div class="flex-container">
+  <lc-scroll-box [sensitivity]="2">
+    <div class="work-area">
+      <lc-shift-box class="work-area-shift-box">
+        <app-table *ngFor="let table of tables" [model]="table"></app-table>
+      </lc-shift-box>
+    </div>
+  </lc-scroll-box>
+
+</div>
+
+<button class="add-button" (click)="addTable()">+</button>

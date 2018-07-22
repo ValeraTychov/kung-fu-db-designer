@@ -1,25 +1,7 @@
 :host {
     position: absolute;
-    top: 64px;
+    top: 48px;
     left: 0px;
     right: 0px;
     bottom: 0px;    
-}
-
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-lc-scroll-box {
-    flex: 1 0 auto;
-    margin: 0px;
-}
-
-.work-area {
-    position: absolute; 
-    width: 5000px; 
-    height: 5000px; 
-    background-image: url('/assets/grid.png');
 }

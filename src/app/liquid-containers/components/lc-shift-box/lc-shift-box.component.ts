@@ -121,6 +121,8 @@ export class LcShiftBox implements OnInit {
     if (!this.allowMove) return;
     
     this.setElementPosition({ x: event.clientX, y: event.clientY });
+    
+    event.preventDefault();
   }
 
   public setElementPosition(pointerPosition: { x: number, y: number }) {
