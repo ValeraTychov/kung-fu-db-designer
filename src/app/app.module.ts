@@ -10,6 +10,7 @@ import { SchemeEditorComponent } from './scheme-editor/scheme-editor.component';
 import { TableComponent } from './tables/table/table.component';
 import { FieldListComponent } from './tables/field-list/field-list.component';
 import { FieldComponent } from './tables/field/field.component';
+import { TableOptionsComponent } from './tables/table-options/table-options.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FieldComponent } from './tables/field/field.component';
     SchemeEditorComponent,
     TableComponent,
     FieldListComponent,
-    FieldComponent
+    FieldComponent,
+    TableOptionsComponent
   ],
   imports: [
     BrowserModule,

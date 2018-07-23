@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Table } from '../table.model';
+import { TableDataService } from '../table-data.service';
 
 @Component({
   selector: 'app-table',
@@ -9,12 +10,31 @@ import { Table } from '../table.model';
 })
 export class TableComponent implements OnInit {
 
-  @Input() model:Table;
+  @Input() tableId: number;
 
-  constructor() { }
+  table: Table;
+
+  isTableOptionsActive: boolean = false;
+
+  isFieldOptionsActive: boolean;
+
+  constructor(private tableDataServise: TableDataService) {
+  }
 
   ngOnInit() {
-    console.log(this.model.name);
+    this.table = this.tableDataServise.getTable(this.tableId);
+  }
+
+  public onCanceled(){
+    this.tableOptionsClose();
+  }
+
+  public tableOptionsOpen(){
+    this.isTableOptionsActive = true;
+  }
+
+  public tableOptionsClose(){
+    this.isTableOptionsActive = false;
   }
 
 }

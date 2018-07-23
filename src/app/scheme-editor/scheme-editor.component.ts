@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Table } from '../tables/table.model';
+import { TableDataService } from '../tables/table-data.service';
 
 @Component({
   selector: 'app-scheme-editor',
   templateUrl: './scheme-editor.component.html',
-  styleUrls: ['./scheme-editor.component.css']
+  styleUrls: ['./scheme-editor.component.css'],
+  providers: [TableDataService]
 })
 export class SchemeEditorComponent implements OnInit {
 
-  tables: Table[];
+  tables: Table[] = [];
   
-  constructor() {
-    this.tables = [];
-    for (let i = 0; i < 10; i++){
-      this.tables.push(new Table(i.toString()));
-    }
+  constructor(private tableDataService: TableDataService) {
+
   }
 
   ngOnInit() {
+    //this.tables = this.tableDataService.getTables();
   }
 
   addTable(){
-    let newName: string = (parseInt(this.tables[this.tables.length - 1].name) + 1).toString();
-    
-    this.tables.push(new Table(newName));
-    console.log(newName);
+    this.tableDataService.createTable();
+    this.tables = this.tableDataService.getTables();
+
+    //console.log(newName);
   }
 
 }

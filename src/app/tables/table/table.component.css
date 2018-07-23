@@ -19,10 +19,11 @@
 }
 
 p {
-    margin: 2px;
+    margin: 5px;
     user-select: none;
-    line-height: 20px;
-    font-weight: bold;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .options-button {
