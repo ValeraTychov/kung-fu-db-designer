@@ -230,7 +230,7 @@ module.exports = ".header-row {\r\n    display: flex;\r\n    background-color: #
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header-row\">\r\n  <div class=\"label\">\r\n    <p>Kung Fu Db Designer</p>\r\n  </div>\r\n  <div class=\"icon-container\">\r\n    <a href=\"https://github.com/ValeraTychov/kung-fu-db-designer\">\r\n      <img src=\"./assets/github-icon.svg\" alt=\"GitHub\">\r\n    </a>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"header-row\">\r\n  <div class=\"label\">\r\n    <p>Kung Fu Db Designer</p>\r\n  </div>\r\n  <div class=\"icon-container\">\r\n    <a href=\"https://github.com/ValeraTychov/kung-fu-db-designer\">\r\n      <img src=\"assets/github-icon.svg\" alt=\"GitHub\">\r\n    </a>\r\n  </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1058,7 +1058,7 @@ module.exports = ":host{\r\n    position: absolute;\r\n}\r\n\r\n.table {\r\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"table\">\r\n  <div class=\"table-header lc-shift-hook\">\r\n    <p class=\"lc-shift-hook\">{{table.name}}</p>\r\n    <button class=\"options-button\" (click)=\"tableOptionsOpen()\">\r\n      <img src=\"./assets/options-icon.svg\" alt=\"\">\r\n    </button>\r\n  </div>\r\n  <div class=\"table-comment\">{{table.comment}}</div>\r\n  <app-table-options \r\n    *ngIf=\"isTableOptionsActive\"\r\n    [tableId]=\"tableId\"\r\n    (canceled)=\"onCanceled($event)\"  \r\n  >\r\n  </app-table-options>\r\n\r\n  <app-field-list>\r\n\r\n  </app-field-list>\r\n\r\n  <div class=\"footer\">\r\n    <a href=\"#\">Add Field</a>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"table\">\r\n  <div class=\"table-header lc-shift-hook\">\r\n    <p class=\"lc-shift-hook\">{{table.name}}</p>\r\n    <button class=\"options-button\" (click)=\"tableOptionsOpen()\">\r\n      <img src=\"assets/options-icon.svg\" alt=\"\">\r\n    </button>\r\n  </div>\r\n  <div class=\"table-comment\">{{table.comment}}</div>\r\n  <app-table-options \r\n    *ngIf=\"isTableOptionsActive\"\r\n    [tableId]=\"tableId\"\r\n    (canceled)=\"onCanceled($event)\"  \r\n  >\r\n  </app-table-options>\r\n\r\n  <app-field-list>\r\n\r\n  </app-field-list>\r\n\r\n  <div class=\"footer\">\r\n    <a href=\"#\">Add Field</a>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
