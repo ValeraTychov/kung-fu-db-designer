@@ -11,7 +11,7 @@ export class FieldComponent implements OnInit {
   
   @Input() fieldId: number;
 
-  private field: Field;
+  public field: Field;
   
   isFieldOptionsActive: boolean = false;
 
