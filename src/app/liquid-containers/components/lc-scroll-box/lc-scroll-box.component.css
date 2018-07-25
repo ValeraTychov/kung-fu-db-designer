@@ -1,9 +1,0 @@
-:host {
-    position: relative;
-    display: block;
-    overflow: scroll;
-}
-
-:host /deep/ .lc-no-scroll{
-    user-select: text;
-}
