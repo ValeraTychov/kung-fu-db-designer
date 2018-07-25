@@ -1,47 +1,57 @@
 :host{
     position: absolute;
-}
-
-.table {
     background-color: white;
     border: 1px solid black;  
-    
+}
+
+:host(.lc-shift-moving) {
+    opacity: 0.7;
 }
 
 .table-header {
     display: flex;
-    align-self: center;
+    align-items: center;
     justify-content: space-between;
     background-color: lightgray;
     border: 1px solid black;  
     margin: -1px;
     height: 24px;
+    user-select: none;
 }
 
-p {
+.table-header p {
     margin: 5px;
+    max-width: 350px;
+    overflow: hidden;
     user-select: none;
     line-height: 14px;
     font-size: 14px;
     font-weight: 600;
 }
 
-.options-button {
+.table-options-icon {
     margin: 0px;
     margin-right: 1px;
     height: 24px;
+    cursor: pointer;
 }
 
-.options-button img {
+.table-options-icon img {
     height: 18px;
     margin: 3px;
-
-}
-
-a {
-    margin: 5px;
 }
 
 .lc-shift-hook {
     cursor: move;
+}
+
+.table-comment {
+    padding: 3px;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-width: 400px;
+    max-height: 70px;
+    white-space: pre-wrap;
 }

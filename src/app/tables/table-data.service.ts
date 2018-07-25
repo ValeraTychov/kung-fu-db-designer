@@ -1,5 +1,5 @@
 import { Table } from '../tables/table.model';
-import { Injectable } from '../../../node_modules/@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TableDataService {

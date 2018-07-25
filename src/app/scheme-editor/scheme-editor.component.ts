@@ -18,12 +18,12 @@ export class SchemeEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.tables = this.tableDataService.getTables();
+    this.tables = this.tableDataService.getTables();
   }
 
   addTable(){
     this.tableDataService.createTable();
-    this.tables = this.tableDataService.getTables();
+    //this.tables = this.tableDataService.getTables();
 
     //console.log(newName);
   }

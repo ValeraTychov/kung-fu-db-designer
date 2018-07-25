@@ -4,10 +4,6 @@
     overflow: scroll;
 }
 
-:host(.ondrag) {
-    cursor: move;
-}
-
 :host /deep/ .lc-no-scroll{
     user-select: text;
 }

@@ -1,29 +1,41 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TableDataService } from '../table-data.service';
 
+class CustomProperties {
+  name: string;
+  headerColor: string;
+  comment: string;
+}
+
 @Component({
   selector: 'app-table-options',
   templateUrl: './table-options.component.html',
   styleUrls: ['./table-options.component.css']
 })
 export class TableOptionsComponent implements OnInit {
-  
-  constructor(private tableDataServise: TableDataService) { }
-
-  ngOnInit() {
-  }
 
   @Input() tableId: number;
 
-  @Output() canceled = new EventEmitter<void>();
+  @Output() canceled = new EventEmitter<void>();  
+
+  customProperties: CustomProperties;
+
+  constructor(private tableDataServise: TableDataService) { }
+
+  ngOnInit() {
+    this.initialCustomProperties();
+  }
+
+  initialCustomProperties(){
+    let table = this.tableDataServise.getTable(this.tableId);
+    this.customProperties = new CustomProperties();
+    this.customProperties.name = table.name;
+    this.customProperties.headerColor = table.headerColor;
+    this.customProperties.comment = table.comment;
+  }
 
   public save() {
-    let properties = {
-      name: "test1",
-      headerColor: "test2",
-      comment: "test3"
-    }
-    this.tableDataServise.setTableProperties(this.tableId, properties);
+    this.tableDataServise.setTableProperties(this.tableId, this.customProperties);
     
     this.cancel();
   }

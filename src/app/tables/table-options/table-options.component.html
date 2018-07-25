@@ -1,7 +1,29 @@
-<div class="options-container">
-  <input type="text" /><br/>
-  <textarea></textarea><br/>
-  <button (click)="save()">Save</button>
-  <button (click)="cancel()">Cancel</button>
-  <button (click)="delete()">Delete table</button>
+<div class="input-panel">
+    <div class="property">
+        <p>Table name</p>
+        <input type="text" [(ngModel)]="customProperties.name"/>
+    </div>
+    <div class="property">
+        <p>Comment</p>
+        <div class="textarea-container">
+            <textarea [(ngModel)]="customProperties.comment"></textarea>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="action-panel">
+    <div class="save-icon" (click)="save()">
+        <img src="assets/icon-accept-database.svg" alt="">
+        <p>Save</p>
+    </div>
+    <div class="cancel-icon" (click)="cancel()">
+        <img src="assets/icon-data-backup.svg" alt="">
+        <p>Cancel</p>
+    </div>
+    <div class="delete-icon" (click)="delete()">
+        <img src="assets/icon-delete-database.svg" alt="">
+        <p>Delete</p>
+    </div>
 </div>

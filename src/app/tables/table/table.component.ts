@@ -16,17 +16,15 @@ export class TableComponent implements OnInit {
 
   isTableOptionsActive: boolean = false;
 
-  isFieldOptionsActive: boolean;
-
-  constructor(private tableDataServise: TableDataService) {
+  constructor(private tableDataService: TableDataService) {
   }
 
   ngOnInit() {
-    this.table = this.tableDataServise.getTable(this.tableId);
+    this.table = this.tableDataService.getTable(this.tableId);
   }
 
-  public onCanceled(){
-    this.tableOptionsClose();
+  public tableOptionsToggle(){
+    this.isTableOptionsActive = !this.isTableOptionsActive;
   }
 
   public tableOptionsOpen(){

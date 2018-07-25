@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    border: 1px solid black;
+    margin: -1px;
+}
+
+.field-row {
+    display: flex;
+    justify-content: space-between;
+    height: 24px;
+}
+
+.field-icons{
+    padding: 0px 4px;
+    width: 50px;
+}
+
+.field-icons img {
+    margin: 4px 0px;
+    height: 16px;
+}
+
+.field-name {
+    margin: 0px;
+    height: 24px;
+}
+
+p {
+    margin: 5px;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.field-options {
+    margin: 0;
+    height: 24;
+    cursor: pointer;
+}
+
+.field-options img {
+    margin: 2px;
+    height: 20px;
+}

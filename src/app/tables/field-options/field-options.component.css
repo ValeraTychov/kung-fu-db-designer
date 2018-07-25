@@ -7,6 +7,7 @@
 
 .property {
     display: flex;
+    align-items: center;
 }
 
 .input-panel p {
@@ -14,27 +15,21 @@
     padding: 5px;
     width: 70px;
     font-size: 12px;
+    text-align: right;
 }
 
-.input-panel input {
+.input-panel input[type="text"]{
     flex-grow: 1;
     margin: 3px;
     margin-bottom: 0px;
     padding: 1px;
 }
 
-.textarea-container {
-    flex-grow: 1;
-    padding: 3px;
-}
-
-textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 3px;
-    resize: none;
-    height: 66px;
-    font-size: 12px;
+.input-panel input [type="checkbox"]{
+    margin-top: 13px;
+    display: block;
+   /* margin-bottom: 0px;
+    padding: 1px; */
 }
 
 .action-panel {

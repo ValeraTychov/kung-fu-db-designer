@@ -12,8 +12,7 @@ import { Component, OnInit, ElementRef, Input } from '@angular/core';
     '(pointerleave)':'onPointerLeave($event)',
     '(touchmove)':'onTouchMove($event)',
     '[scrollLeft]':'scrollPosition.left',
-    '[scrollTop]':'scrollPosition.top',
-    '[class.ondrag]':'isMoving'
+    '[scrollTop]':'scrollPosition.top'
 
   }
 })

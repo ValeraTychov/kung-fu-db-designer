@@ -1,23 +1,14 @@
-<div class="table">
-  <div class="table-header lc-shift-hook">
-    <p class="lc-shift-hook">{{table.name}}</p>
-    <button class="options-button" (click)="tableOptionsOpen()">
-      <img src="assets/options-icon.svg" alt="">
-    </button>
-  </div>
-  <div class="table-comment">{{table.comment}}</div>
-  <app-table-options 
-    *ngIf="isTableOptionsActive"
-    [tableId]="tableId"
-    (canceled)="onCanceled($event)"  
-  >
-  </app-table-options>
-
-  <app-field-list>
-
-  </app-field-list>
-
-  <div class="footer">
-    <a href="#">Add Field</a>
+<div class="table-header lc-shift-hook">
+  <p class="lc-shift-hook">{{table.name}}</p>
+  <div class="table-options-icon" (click)="tableOptionsToggle()">
+    <img src="assets/icon-settings.svg" alt="">
   </div>
 </div>
+<div class="table-comment" *ngIf="table.comment.length > 0">Comment: {{table.comment}}</div>
+<app-table-options 
+  *ngIf="isTableOptionsActive"
+  [tableId]="tableId"
+  (canceled)="tableOptionsClose()"  
+>
+</app-table-options>
+<app-field-list></app-field-list>

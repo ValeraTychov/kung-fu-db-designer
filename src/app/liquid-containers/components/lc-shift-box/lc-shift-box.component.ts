@@ -99,6 +99,8 @@ export class LcShiftBox implements OnInit {
 
       this.setPointerOffset({x: event.clientX, y: event.clientY});
 
+      this.movableElement.nativeElement.classList.add("lc-shift-moving");
+      
       this.allowMove = true;
     }
 
@@ -133,11 +135,13 @@ export class LcShiftBox implements OnInit {
 
   onPointerEnd(event: PointerEvent){
     this.allowMove = false;
+    this.movableElement.nativeElement.classList.remove("lc-shift-moving");
   }
 
   onPointerLeave(event: PointerEvent){
     if (this.allowMove){
       this.allowMove = false;
+      this.movableElement.nativeElement.classList.remove("lc-shift-moving");
       window.getSelection().removeAllRanges();
     }
   }
