@@ -20,6 +20,7 @@ export class Field {
   public isUnique: boolean;
   public isAutoIncrement: boolean;
   public isForeignKey: boolean;
+  public foreignTable: Table;
   public foreignField: Field;
 
   public table: Table;

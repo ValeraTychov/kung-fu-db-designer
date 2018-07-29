@@ -15,19 +15,20 @@ export class FieldOptionsComponent implements OnInit {
 
   @Input() fieldId: number;
 
-  @Output() canceled = new EventEmitter<void>();  
-  
+  @Output() canceled = new EventEmitter<void>(); 
+
   public formModel: FieldOptionsFormModel;
 
   public sqlTypesDefinitionList: SqlTypeDefinition[];
 
   public selectedTypeDefinition: SqlTypeDefinition; 
 
-  public foreignTableList: Table[] = [];
+  public tables: Table[];
 
-  public selectedTable: Table;
+  public currentTable: Table;
+  public currentField: Field;//Должно быть в Input
 
-  public foreignFieldList: Field[];
+  public foreignFields: Field[];
 
   constructor(private fieldOptionsService: FieldOptionsService) {}
 
@@ -35,8 +36,26 @@ export class FieldOptionsComponent implements OnInit {
     this.formModel = this.fieldOptionsService.getFormModel(this.fieldId);
     this.sqlTypesDefinitionList = this.fieldOptionsService.getSqlTypesDefinitionList();
     this.onTypeSelectorChange();
-    this.onForeignTableChange();
+
+    this.setTableList();
+    this.setFieldList();
+
   }
+
+  setTableList(){
+    this.tables = this.fieldOptionsService.getTables();
+    this.currentField = this.fieldOptionsService.getField(this.fieldId);
+    this.currentTable = this.currentField.table;
+  }
+
+  setFieldList(){
+    if (this.formModel.foreignTable){
+      this.foreignFields = this.formModel.foreignTable.fields;
+      return;
+    }
+    this.foreignFields = [];
+  }
+
 
   public onTypeSelectorChange() {
     let typeName = this.formModel.type.name;
@@ -45,10 +64,8 @@ export class FieldOptionsComponent implements OnInit {
   }
 
   public onForeignTableChange() {
-    this.getForeignTableList();//говно не возвращает значения ... переделать
-    let table = this.foreignTableList.find ( ( val ) => { return val.id == this.formModel.foreignTableId; } );
-    this.foreignFieldList = table.fields;
-    console.log(this.foreignTableList);
+    let selectedTable = this.formModel.foreignTable;
+    this.foreignFields = selectedTable.fields;
   }
 
   public save() {
@@ -68,8 +85,6 @@ export class FieldOptionsComponent implements OnInit {
     return this.selectedTypeDefinition.arguments;
   }
 
-  public getForeignTableList(){
-    this.foreignTableList = this.fieldOptionsService.getForeignTableList(this.fieldId);
-  }
+
 
 }

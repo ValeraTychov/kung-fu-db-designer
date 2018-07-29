@@ -41,18 +41,18 @@
     <div *ngIf="formModel.isForeignKey">
         <div class="property">
             <p>Table</p>
-            <select [(ngModel)]="formModel.foreignTableId"
+            <select [(ngModel)]="formModel.foreignTable"
                     (change)="onForeignTableChange()">
-                <option *ngFor="let table of tables" 
-                        [value]="table.id">{{table.name}}</option>
+                <option *ngFor="let table of tables" [disabled]="table === currentTable"
+                        [ngValue]="table">{{table.name}}</option>
             </select>
         </div>
         <div class="property">
             <p>Field</p>
-            <select [(ngModel)]="formModel.foreignFieldId"
+            <select [(ngModel)]="formModel.foreignField"
                     >
-                <option *ngFor="let field of foreignFieldList" 
-                        [value]="field.id">{{field.name}}</option>
+                <option *ngFor="let field of foreignFields" 
+                        [ngValue]="field">{{field.name}}</option>
             </select>
         </div>
     </div>

@@ -1,8 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 
+import { TableDataService } from '../table-data.service';
 import { FieldDataService } from '../field-data.service';
 import { SqlType, SqlTypeDefinition } from '../sql-types.model';
-import { TableDataService } from '../table-data.service';
+import { Table } from '../table.model';
+import { Field } from '../field.model';
 
 export class FieldOptionsFormModel {
   public name: string;
@@ -14,8 +16,9 @@ export class FieldOptionsFormModel {
   public isUnique: boolean;
   public isAutoIncrement: boolean;
   public isForeignKey: boolean;
-  public foreignTableId: number;
-  public foreignFieldId: number;
+
+  public foreignTable: Table;
+  public foreignField: Field;
 }
 
 @Injectable()
@@ -33,19 +36,6 @@ export class FieldOptionsService {
       formModel[property] = field[property];
     }
 
-    let foreignTableList = this.getForeignTableList(fieldId);
-    if (field.foreignField){
-      formModel.foreignTableId = field.foreignField.table.id;
-      formModel.foreignFieldId = field.foreignField.id;
-    }
-    else if (foreignTableList.length > 0){
-      formModel.foreignTableId = foreignTableList[0].id;
-      formModel.foreignFieldId = foreignTableList[0].fields[0].id;
-    }
-    else {
-      formModel.foreignTableId = -1;
-      formModel.foreignFieldId = -1;
-    }
 
     return formModel;
   }
@@ -60,10 +50,9 @@ export class FieldOptionsService {
     field.isUnique = formModel.isUnique;
     field.isAutoIncrement = formModel.isAutoIncrement;
     field.isForeignKey = formModel.isForeignKey;
+    field.foreignTable = formModel.foreignTable;
+    field.foreignField = formModel.foreignField;
 
-    let foreignTable = this.tableDataServise.getTable(formModel.foreignTableId);
-    let foreignField = foreignTable.fields.find( (val) => { return val.id == formModel.foreignFieldId;} );
-    field.foreignField = foreignField;
   }
 
   public deleteField(fieldId: number){
@@ -80,14 +69,12 @@ export class FieldOptionsService {
     return null;
   }
 
-  public getForeignTableList(fieldId: number){
-    let tableList = this.tableDataServise.getTables();
-    let field = this.fieldDataServise.getField(fieldId);
-    return tableList.filter( (val) => { return val != field.table; } );
-  }
-
   public getTables(){
     return this.tableDataServise.getTables();
+  }
+
+  public getField(fieldId: number){
+    return this.fieldDataServise.getField(fieldId);
   }
 
 }
