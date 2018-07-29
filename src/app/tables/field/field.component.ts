@@ -37,4 +37,7 @@ export class FieldComponent implements OnInit {
     this.isFieldOptionsActive = false;
   }
 
+  public getArgumentsString(){
+    return "()"
+  }
 }

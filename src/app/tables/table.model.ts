@@ -8,6 +8,8 @@ export class Table {
 
   public fields: Field[] = [];
 
+  public initStyles: any;
+
   constructor(public id: number) {}
 
 }

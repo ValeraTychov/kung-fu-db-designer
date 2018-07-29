@@ -18,11 +18,15 @@
     text-align: right;
 }
 
-.input-panel input[type="text"]{
+.input-panel input[type="text"], .input-panel select {
     flex-grow: 1;
     margin: 3px;
     margin-bottom: 0px;
     padding: 1px;
+}
+
+select:first-child {
+    font-size: 30px;
 }
 
 .input-panel input [type="checkbox"]{

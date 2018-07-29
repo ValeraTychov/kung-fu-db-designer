@@ -1,5 +1,9 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
+export class ElementPosition{
+  left:number;
+  top:number;
+}
 
 @Component({
   selector: 'lc-scroll-box',
@@ -21,22 +25,17 @@ export class LcScrollBox implements OnInit {
   // Scroll shift to cursor shift ratio. 
   @Input () sensitivity: number = 1;
   
+  @Output() scrollChanged = new EventEmitter<ElementPosition>();
+
   allowMove: boolean = false;
 
   containerElement: HTMLElement;
 
-  scrollPosition: { left: number, top: number } = { left: 0, top: 0 }
-   
-  getScrollPositionFromElement(): { left: number, top: number } {
-    let left = this.containerElement.scrollLeft;
-    let top = this.containerElement.scrollTop;
-
-    return { left: left, top: top }
-  };
+  scrollPosition: ElementPosition = { left: 0, top: 0 }
 
   private startCursorPosition: { x: number, y: number } = { x: 0, y: 0 };
 
-  private startScrollPosition: { left: number, top: number } = { left: 0, top: 0 };
+  private startScrollPosition: ElementPosition = { left: 0, top: 0 };
 
   constructor(private elementRef: ElementRef) {
     this.containerElement = elementRef.nativeElement;
@@ -44,6 +43,13 @@ export class LcScrollBox implements OnInit {
 
   ngOnInit() {
   }
+   
+  getScrollPositionFromElement(): ElementPosition {
+    let left = this.containerElement.scrollLeft;
+    let top = this.containerElement.scrollTop;
+
+    return { left: left, top: top }
+  };
 
   onPointerDown(event: PointerEvent){
     window.getSelection().removeAllRanges();
@@ -98,6 +104,9 @@ export class LcScrollBox implements OnInit {
     if (!this.allowMove) return;
 
     this.updateScrollPosition({ x: event.clientX, y: event.clientY });
+
+
+
   }
 
   updateScrollPosition(cursorPosition: { x: number, y: number }) {
@@ -113,13 +122,19 @@ export class LcScrollBox implements OnInit {
 
   onPointerEnd(event: PointerEvent){
     this.allowMove = false;
+    this.emitCurentScroll();
   }
 
   onPointerLeave(event: PointerEvent){
     if (this.allowMove){
       this.allowMove = false;
       window.getSelection().removeAllRanges();
+      this.emitCurentScroll();
     }
+  }
+
+  emitCurentScroll(){
+    this.scrollChanged.emit(this.getScrollPositionFromElement());
   }
 
   onTouchMove(event: TouchEvent){

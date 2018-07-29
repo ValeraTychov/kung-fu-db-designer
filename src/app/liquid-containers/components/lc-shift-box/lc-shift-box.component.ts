@@ -99,7 +99,7 @@ export class LcShiftBox implements OnInit {
 
       this.setPointerOffset({x: event.clientX, y: event.clientY});
 
-      this.movableElement.nativeElement.classList.add("lc-shift-moving");
+      this.setMovedStyle();
       
       this.allowMove = true;
     }
@@ -119,6 +119,16 @@ export class LcShiftBox implements OnInit {
     this.pointerOffset.fromTop = pointerPosition.y - this.movableElement.top;
   }
 
+  public setMovedStyle() {
+    this.movableElement.nativeElement.classList.add("lc-shift-moved");
+  }
+
+  public removeMovedStyle() {
+    if (this.movableElement) {
+      this.movableElement.nativeElement.classList.remove("lc-shift-moved");
+    }
+  }
+
   onPointerMove(event: PointerEvent){
     if (!this.allowMove) return;
     
@@ -135,13 +145,13 @@ export class LcShiftBox implements OnInit {
 
   onPointerEnd(event: PointerEvent){
     this.allowMove = false;
-    this.movableElement.nativeElement.classList.remove("lc-shift-moving");
+    this.removeMovedStyle();
   }
 
   onPointerLeave(event: PointerEvent){
     if (this.allowMove){
       this.allowMove = false;
-      this.movableElement.nativeElement.classList.remove("lc-shift-moving");
+      this.removeMovedStyle();
       window.getSelection().removeAllRanges();
     }
   }
