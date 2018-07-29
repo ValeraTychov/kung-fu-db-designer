@@ -1,8 +1,8 @@
 import { Field } from './field.model';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { Repository } from './repository.generic';
-import { SqlType } from './sql-types.model';
+import { SqlType, SqlTypeDefinition } from './sql-types.model';
 import { Table } from './table.model';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class FieldDataService {
   
   private repository: Repository<Field>;
 
-  constructor (){
+  constructor (@Inject('sqlTypeDefinitionList') private sqlTypeDefinitionList: Array<SqlTypeDefinition>){
     this.repository = new Repository<Field>();
   }
 
@@ -24,7 +24,8 @@ export class FieldDataService {
 
   public createField(table: Table){
     let newFieldId = this.repository.create(Field);
-    let initialProperties = {table: table, name: 'Untitled' + newFieldId, type: new SqlType("binary")};
+    let type = new SqlType(this.sqlTypeDefinitionList[0]);
+    let initialProperties = {table: table, name: 'Untitled' + newFieldId, type: type};
     this.repository.setProperties(newFieldId, initialProperties);
   }
 

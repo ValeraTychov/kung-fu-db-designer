@@ -10,9 +10,7 @@ import { TableDataService } from '../table-data.service';
 })
 export class TableComponent implements OnInit {
 
-  @Input() tableId: number;
-
-  table: Table;
+  @Input() currentTable: Table;
 
   isTableOptionsActive: boolean = false;
 
@@ -22,7 +20,6 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.table = this.tableDataService.getTable(this.tableId);
     let htmlElement = this.elementRef.nativeElement;
     let initStyles = this.tableDataService.initStyles;
     for (let i = 0; i < initStyles.length; i++){

@@ -1,14 +1,13 @@
 export class SqlType{
-    name: string;
-    arguments: number[];
+    public definition: SqlTypeDefinition;
+    public arguments: number[] = [];
 
-    constructor (typeName?: string){
-        if (typeName){
-            let typeDef = sqlTypeDefinitionList.find( (val) => {return val.name === typeName;} )
-            if (typeDef){
-                this.name = typeDef.name;
-                this.arguments = new Array<number>(typeDef.arguments.length);
-            }
+    constructor (typeDefinition?: SqlTypeDefinition){
+        if (typeDefinition) {
+            this.definition = typeDefinition;
+        }
+        else{
+            this.definition = sqlTypeDefinitionList[0];
         }
     }
 }
@@ -37,7 +36,7 @@ export const sqlTypeDefinitionList: Array<SqlTypeDefinition> = [
     {   name: "binary",
         arguments: [
             {
-                name: "n",
+                name: "size",
                 constraints: {
                     min: 1,
                     max: 8000
@@ -76,7 +75,7 @@ export const sqlTypeDefinitionList: Array<SqlTypeDefinition> = [
     {   name: "float",
         arguments: [
             {
-                name: "n",
+                name: "size",
                 constraints: {
                     min: 1,
                     max: 53
@@ -99,7 +98,7 @@ export const sqlTypeDefinitionList: Array<SqlTypeDefinition> = [
     {   name: "varchar",
         arguments: [
             {
-                name: "n",
+                name: "size",
                 constraints: {
                     min: 1,
                     max: 8000

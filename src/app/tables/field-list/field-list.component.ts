@@ -12,22 +12,19 @@ import { TableDataService } from '../table-data.service';
 })
 export class FieldListComponent implements OnInit {
 
-  @Input() tableId: number;
+  @Input() currentTable: Table;
 
-  fields: Field[] = [];
-
-  table: Table;
+  fieldList: Field[] = [];
 
   constructor(private fieldDataService: FieldDataService, private tableDataService: TableDataService) { }
 
   ngOnInit() {
-    this.fields = this.fieldDataService.getFields();
-    this.table = this.tableDataService.getTable(this.tableId);
-    this.table.fields = this.fields;
+    this.fieldList = this.fieldDataService.getFields();
+    this.currentTable.fields = this.fieldList;
   }
 
   addField(){
-    this.fieldDataService.createField(this.table);
+    this.fieldDataService.createField(this.currentTable);
   }
 
 }

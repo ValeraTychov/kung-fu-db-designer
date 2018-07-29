@@ -16,12 +16,12 @@ export class SchemeEditorComponent implements OnInit {
 
   scrollPosition: ElementPosition = {left: 0, top: 0};
 
-  tables: Table[] = [];
+  tableList: Table[];
   
   constructor(private tableDataService: TableDataService) {}
 
   ngOnInit() {
-    this.tables = this.tableDataService.getTables();
+    this.tableList = this.tableDataService.getTables();
   }
 
   addTable(){

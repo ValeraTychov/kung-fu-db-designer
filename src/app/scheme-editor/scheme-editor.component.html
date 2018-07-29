@@ -2,7 +2,7 @@
   <lc-scroll-box [sensitivity]="2" (scrollChanged)="onScrollChanged($event)">
     <div class="work-area">
       <lc-shift-box class="work-area-shift-box">
-        <app-table *ngFor="let table of tables" [tableId]="table.id"></app-table>
+        <app-table *ngFor="let table of tableList" [currentTable]="table"></app-table>
       </lc-shift-box>
     </div>
   </lc-scroll-box>

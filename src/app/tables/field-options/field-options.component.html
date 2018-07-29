@@ -1,57 +1,56 @@
 <div class="input-panel">
     <div class="property">
         <p>Field name</p>
-        <input type="text" [(ngModel)]="formModel.name"/>
+        <input type="text" [(ngModel)]="customProperties.name"/>
     </div>
     <div class="property">
         <p>Type</p>
-        <select [(ngModel)]="formModel.type.name"
-                (change)="onTypeSelectorChange()">
-            <option *ngFor="let type of sqlTypesDefinitionList" [value]="type.name">{{type.name}}</option>
+        <select [(ngModel)]="customProperties.type.definition">
+            <option *ngFor="let type of sqlTypeDefinitionList" [ngValue]="type">{{type.name}}</option>
         </select>  
     </div>
-    <div *ngIf="checkSelectedTypeHasArguments()">
-        <div class="property" *ngFor="let argument of selectedTypeDefinition.arguments; let i = index">
+    <div *ngIf="customProperties.type.definition.arguments">
+        <div class="property" *ngFor="let argument of customProperties.type.definition.arguments; let i = index">
             <p>{{argument.name}}</p>
-            <input type="text" [(ngModel)]="formModel.type.arguments[i]"/>
+            <input type="text" [(ngModel)]="customProperties.type.arguments[i]"/>
         </div>
     </div>
     <div class="property">
         <p>Default</p>
-        <input type="text" [(ngModel)]="formModel.default"/>
+        <input type="text" [(ngModel)]="customProperties.default"/>
     </div>
     <div class="property">
         <p>Primary Key</p>
-        <input type="checkbox" [(ngModel)]="formModel.isPrimaryKey"/>
+        <input type="checkbox" [(ngModel)]="customProperties.isPrimaryKey"/>
     </div>
     <div class="property">
         <p>Allow nulls</p>
         <input type="checkbox" 
-        [disabled]="formModel.isPrimaryKey" 
-        [(ngModel)]="formModel.isAllowNulls"/>
+        [disabled]="customProperties.isPrimaryKey" 
+        [(ngModel)]="customProperties.isAllowNulls"/>
     </div>    
     <div class="property">
         <p>Unique</p>
-        <input type="checkbox" [(ngModel)]="formModel.isUnique"/>
+        <input type="checkbox" [(ngModel)]="customProperties.isUnique"/>
     </div>   
     <div class="property">
         <p>Foreign Key</p>
-        <input type="checkbox" [(ngModel)]="formModel.isForeignKey"/>
+        <input type="checkbox" [(ngModel)]="customProperties.isForeignKey"/>
     </div> 
-    <div *ngIf="formModel.isForeignKey">
+    <div *ngIf="customProperties.isForeignKey">
         <div class="property">
             <p>Table</p>
-            <select [(ngModel)]="formModel.foreignTable"
+            <select [(ngModel)]="customProperties.foreignTable"
                     (change)="onForeignTableChange()">
-                <option *ngFor="let table of tables" [disabled]="table === currentTable"
+                <option *ngFor="let table of tableList" [disabled]="table === currentTable"
                         [ngValue]="table">{{table.name}}</option>
             </select>
         </div>
         <div class="property">
             <p>Field</p>
-            <select [(ngModel)]="formModel.foreignField"
+            <select [(ngModel)]="customProperties.foreignField"
                     >
-                <option *ngFor="let field of foreignFields" 
+                <option *ngFor="let field of foreignFieldList" 
                         [ngValue]="field">{{field.name}}</option>
             </select>
         </div>

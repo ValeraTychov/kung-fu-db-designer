@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TableDataService } from '../table-data.service';
+import { Table } from '../table.model';
 
 class CustomProperties {
   name: string;
@@ -14,7 +15,7 @@ class CustomProperties {
 })
 export class TableOptionsComponent implements OnInit {
 
-  @Input() tableId: number;
+  @Input() currentTable: Table;
 
   @Output() canceled = new EventEmitter<void>();  
 
@@ -23,19 +24,18 @@ export class TableOptionsComponent implements OnInit {
   constructor(private tableDataServise: TableDataService) { }
 
   ngOnInit() {
-    this.initialCustomProperties();
+    this.setInitialCustomProperties();
   }
 
-  initialCustomProperties(){
-    let table = this.tableDataServise.getTable(this.tableId);
+  setInitialCustomProperties(){
     this.customProperties = new CustomProperties();
-    this.customProperties.name = table.name;
-    this.customProperties.headerColor = table.headerColor;
-    this.customProperties.comment = table.comment;
+    this.customProperties.name = this.currentTable.name;
+    this.customProperties.headerColor = this.currentTable.headerColor;
+    this.customProperties.comment = this.currentTable.comment;
   }
 
   public save() {
-    this.tableDataServise.setTableProperties(this.tableId, this.customProperties);
+    this.tableDataServise.setTableProperties(this.currentTable.id, this.customProperties);
     
     this.cancel();
   }
@@ -45,7 +45,7 @@ export class TableOptionsComponent implements OnInit {
   }
 
   public delete() {
-    this.tableDataServise.deleteTable(this.tableId);
+    this.tableDataServise.deleteTable(this.currentTable.id);
   }
 
 }

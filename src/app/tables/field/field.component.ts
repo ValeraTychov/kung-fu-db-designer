@@ -9,17 +9,13 @@ import { Field } from '../field.model';
 })
 export class FieldComponent implements OnInit {
   
-  @Input() fieldId: number;
-
-  public field: Field;
+  @Input() currentField: Field;
   
   isFieldOptionsActive: boolean = false;
 
-  constructor(private fieldDataService: FieldDataService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.field = this.fieldDataService.getField(this.fieldId);
-  }
+  ngOnInit() {}
 
   public onCanceled(){
     this.fieldOptionsClose();
@@ -38,6 +34,6 @@ export class FieldComponent implements OnInit {
   }
 
   public getArgumentsString(){
-    return "()"
+    return ""
   }
 }
