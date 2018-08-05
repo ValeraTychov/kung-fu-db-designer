@@ -1,7 +1,8 @@
-import { Table } from './table.model';
 import { Injectable } from '@angular/core';
 
-import { Repository } from './repository.generic';
+import { Table } from './table.model';
+import { Repository } from '../core/repository.generic';
+import { ConnectionLinesService } from '../connection-lines/connection-lines.service';
 
 @Injectable()
 export class TableDataService {
@@ -10,7 +11,7 @@ export class TableDataService {
 
   public initStyles: [{style: string, value: string}];
 
-  constructor (){
+  constructor (private connectionLinesService: ConnectionLinesService){
     this.repository = new Repository<Table>();
   }
 
@@ -28,10 +29,14 @@ export class TableDataService {
     this.repository.setProperties(newTableId, name);
     
     this.initStyles = styles;
+
+    let table = this.repository.get(newTableId);
+    this.connectionLinesService.addTable(table);
   }
 
   public deleteTable(id: number){
     this.repository.delete(id);
+    this.connectionLinesService.deleteTable(id);
   }
 
   //I think this method may become a sourse of type errors.

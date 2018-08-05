@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FieldDataService } from '../field-data.service';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
+
 import { Field } from '../field.model';
+import { FieldDataService } from '../field-data.service';
+import { ConnectionLinesService } from '../../connection-lines/connection-lines.service';
 
 @Component({
   selector: 'app-field',
@@ -13,9 +15,18 @@ export class FieldComponent implements OnInit {
   
   isFieldOptionsActive: boolean = false;
 
-  constructor() { }
+  constructor(private elementRef: ElementRef,
+              private fieldDataService: FieldDataService,
+              private connectionLinesService: ConnectionLinesService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let nativeElement: HTMLElement = this.elementRef.nativeElement;
+    this.fieldDataService.setFieldProperties(this.currentField.id, {nativeElement: nativeElement})
+  }
+
+  ngDoCheck(){
+
+  }
 
   public onCanceled(){
     this.fieldOptionsClose();

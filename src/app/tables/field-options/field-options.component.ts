@@ -5,6 +5,7 @@ import { Table } from '../table.model';
 import { Field } from '../field.model';
 import { FieldDataService } from '../field-data.service';
 import { TableDataService } from '../table-data.service';
+import { ConnectionLinesService } from '../../connection-lines/connection-lines.service';
 
 export class CustomProperties {
   public name: string;
@@ -43,14 +44,17 @@ export class FieldOptionsComponent implements OnInit {
   public currentTable: Table;
 
   constructor(private fieldDataServise: FieldDataService,
-    private tableDataServise: TableDataService,
-    @Inject('sqlTypeDefinitionList') public sqlTypeDefinitionList: Array<SqlTypeDefinition>) {}
+              private connectionLinesService: ConnectionLinesService,
+              private tableDataServise: TableDataService,
+              @Inject('sqlTypeDefinitionList') public sqlTypeDefinitionList: Array<SqlTypeDefinition>) {}
 
   ngOnInit() {
     this.setInitialCustomProperties();
 
     this.setTableList();
     this.setFieldList();
+
+    this.connectionLinesService.emit(this.currentTable);
   }
 
   setInitialCustomProperties(){
@@ -82,6 +86,7 @@ export class FieldOptionsComponent implements OnInit {
 
   public save() {
     this.fieldDataServise.setFieldProperties(this.currentField.id, this.customProperties);
+    this.setConnectionLine();
     this.cancel();
   }
 
@@ -91,6 +96,18 @@ export class FieldOptionsComponent implements OnInit {
 
   public delete() {
     this.fieldDataServise.deleteField(this.currentField.id);
+  }
+
+  setConnectionLine(){
+    if (this.currentField.isForeignKey){
+      let parent = this.currentField;
+      let child = this.currentField.foreignField;
+      this.connectionLinesService.addLine(parent, child);
+    }
+  }
+
+  ngOnDestroy(){
+    this.connectionLinesService.emit(this.currentTable);
   }
 
 }

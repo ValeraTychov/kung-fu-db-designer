@@ -25,6 +25,8 @@ export class Field {
 
   public table: Table;
 
+  public nativeElement: HTMLElement;
+
   constructor(public id: number) {}
 
 }

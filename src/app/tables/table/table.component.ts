@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ElementRef, Renderer2 } from '@angular/core';
 
 import { Table } from '../table.model';
 import { TableDataService } from '../table-data.service';
+import { ConnectionLinesService } from '../../connection-lines/connection-lines.service';
 
 @Component({
   selector: 'app-table',
@@ -20,13 +21,14 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    let htmlElement = this.elementRef.nativeElement;
+    let nativeElement = this.elementRef.nativeElement;
     let initStyles = this.tableDataService.initStyles;
     for (let i = 0; i < initStyles.length; i++){
       let style = initStyles[i].style;
       let value = initStyles[i].value;
-      this.renderer.setStyle(htmlElement, style, value);
-    }    
+      this.renderer.setStyle(nativeElement, style, value);
+    }
+    this.tableDataService.setTableProperties(this.currentTable.id, {nativeElement: nativeElement});
   }
 
   public tableOptionsToggle(){

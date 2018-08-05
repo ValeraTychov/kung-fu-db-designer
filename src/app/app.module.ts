@@ -13,6 +13,7 @@ import { FieldListComponent } from './tables/field-list/field-list.component';
 import { FieldComponent } from './tables/field/field.component';
 import { TableOptionsComponent } from './tables/table-options/table-options.component';
 import { FieldOptionsComponent } from './tables/field-options/field-options.component';
+import { ConnectionLinesComponent } from './connection-lines/connection-lines.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FieldOptionsComponent } from './tables/field-options/field-options.comp
     FieldListComponent,
     FieldComponent,
     TableOptionsComponent,
-    FieldOptionsComponent
+    FieldOptionsComponent,
+    ConnectionLinesComponent
   ],
   imports: [
     BrowserModule,

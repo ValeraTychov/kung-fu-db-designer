@@ -1,0 +1,8 @@
+<svg width="5000" height="5000" xmlns="http://www.w3.org/2000/svg">
+
+  <g *ngFor="let line of lineList">
+    <path  [attr.d]="line.pathDString" stroke="black" fill="none"/>
+    <path  [attr.d]="arrow" stroke="black" fill="blue"/>
+  </g>
+  
+</svg>

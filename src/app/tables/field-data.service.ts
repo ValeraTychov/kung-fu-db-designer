@@ -1,7 +1,7 @@
 import { Field } from './field.model';
 import { Injectable, Inject } from '@angular/core';
 
-import { Repository } from './repository.generic';
+import { Repository } from '../core/repository.generic';
 import { SqlType, SqlTypeDefinition } from './sql-types.model';
 import { Table } from './table.model';
 

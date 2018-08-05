@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { TableDataService } from '../table-data.service';
 import { Table } from '../table.model';
+import { ConnectionLinesService } from '../../connection-lines/connection-lines.service';
 
 class CustomProperties {
   name: string;
@@ -21,10 +22,13 @@ export class TableOptionsComponent implements OnInit {
 
   customProperties: CustomProperties;
 
-  constructor(private tableDataServise: TableDataService) { }
+  constructor(private tableDataServise: TableDataService,
+              private connectionLinesService: ConnectionLinesService) { }
 
   ngOnInit() {
     this.setInitialCustomProperties();
+
+    this.connectionLinesService.emit(this.currentTable);
   }
 
   setInitialCustomProperties(){
@@ -46,6 +50,10 @@ export class TableOptionsComponent implements OnInit {
 
   public delete() {
     this.tableDataServise.deleteTable(this.currentTable.id);
+  }
+
+  ngOnDestroy(){
+    this.connectionLinesService.emit(this.currentTable);
   }
 
 }

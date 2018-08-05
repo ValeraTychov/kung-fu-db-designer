@@ -10,6 +10,8 @@ export class Table {
 
   public initStyles: any;
 
+  public nativeElement: HTMLElement;
+
   constructor(public id: number) {}
 
 }

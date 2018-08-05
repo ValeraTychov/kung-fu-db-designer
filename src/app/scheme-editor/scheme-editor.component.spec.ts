@@ -8,7 +8,7 @@ describe('SchemeEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SchemeEditorComponent ]
+      declarations: [ SchemeEditorComponent]
     })
     .compileComponents();
   }));
@@ -19,7 +19,5 @@ describe('SchemeEditorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
 });

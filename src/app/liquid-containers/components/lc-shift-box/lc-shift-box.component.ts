@@ -1,4 +1,9 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
+
+export class ElementPosition {
+  left: number;
+  top: number;
+}
 
 export class AbstractElement {
 
@@ -40,7 +45,7 @@ export class AbstractElement {
     this.height = this.nativeElement.offsetHeight;
   }
 
-  setElementPosition( position : {left: number, top: number} ){
+  setElementPosition( position : ElementPosition ){
     this.left = position.left;
     this.top = position.top;
     this.nativeElement.style.transform = `translate(${position.left}px,${position.top}px)`;
@@ -63,6 +68,10 @@ export class AbstractElement {
 export class LcShiftBox implements OnInit {
 
   @Input() options: any;
+
+  @Output() lcmoveend = new EventEmitter<{element: HTMLElement, position: ElementPosition}>();
+
+  @Output() lcmove = new EventEmitter<{element: HTMLElement, position: ElementPosition}>();
 
   containerElement: AbstractElement;
 
@@ -133,6 +142,8 @@ export class LcShiftBox implements OnInit {
     if (!this.allowMove) return;
     
     this.setElementPosition({ x: event.clientX, y: event.clientY });
+
+    this.dispatchMoveEvent();
     
     event.preventDefault();
   }
@@ -144,8 +155,11 @@ export class LcShiftBox implements OnInit {
   }
 
   onPointerEnd(event: PointerEvent){
-    this.allowMove = false;
-    this.removeMovedStyle();
+    if (this.allowMove){
+      this.allowMove = false;
+      this.removeMovedStyle();
+      this.dispatchMoveEndEvent();
+    }
   }
 
   onPointerLeave(event: PointerEvent){
@@ -153,6 +167,7 @@ export class LcShiftBox implements OnInit {
       this.allowMove = false;
       this.removeMovedStyle();
       window.getSelection().removeAllRanges();
+      this.dispatchMoveEndEvent();
     }
   }
 
@@ -161,5 +176,18 @@ export class LcShiftBox implements OnInit {
       event.preventDefault();
     }
   }
+
+  dispatchMoveEndEvent(){
+    let element = this.movableElement.nativeElement;
+    let position = {left: this.movableElement.left, top: this.movableElement.top};
+    this.lcmoveend.emit({element: element, position: position});
+  }
+
+  dispatchMoveEvent(){
+    let element = this.movableElement.nativeElement;
+    let position = {left: this.movableElement.left, top: this.movableElement.top};
+    this.lcmove.emit({element: element, position: position});
+  }
+  
 
 }
